@@ -43,6 +43,7 @@ combobox_switch = {
 content = tk.Tk()
 content.title("Converter")
 content.geometry("500x74")
+content.minsize(500, 74)
 content.attributes("-alpha", 0.5)
 
 # User input component
@@ -86,7 +87,7 @@ def btn_click_handler():
                 is_float = False
 
             print("\n\tNumber: {}".format(text_input))
-            print("\nIs {} a floating point number? {}".format(
+            print("\tIs {} a floating point number? {}".format(
                 text_input, is_float))
             print("\tConverting {} to {}\n".format(text_input, selected_item))
 
