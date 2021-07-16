@@ -12,19 +12,20 @@ def cls(): return os.system('clear')
 
 
 # Regex integers
-number_pattern = re.compile('^[0-9]+$')
+integer_pattern = re.compile('^[0-9]+$')
+float_pattern = re.compile('^[0-9]+(\.[0-9]+){1}$')
 
 
 # Number converters
-def hex(arg):
+def hex(arg, is_float=False):
     return arg
 
 
-def octal(arg):
+def octal(arg, is_float=False):
     return arg
 
 
-def binary(arg):
+def binary(arg, is_float=False):
     return arg
 
 
@@ -42,6 +43,7 @@ combobox_switch = {
 content = tk.Tk()
 content.title("Converter")
 content.geometry("500x74")
+content.attributes("-alpha", 0.5)
 
 # User input component
 tf_entry_number_var = tk.StringVar()
@@ -63,21 +65,31 @@ tf_entry_number = tk.Entry(
 tf_entry_number.grid(column=2, row=1, columnspan=2, padx=5)
 tf_entry_number_var.set("")
 
+""" Component handlers"""
+
 
 def btn_click_handler():
     text_input = tf_entry_number_var.get()
     selected_item = combo_box.get()
+    is_float = False
 
     try:
         if len(text_input) == 0:
             message = error("Must enter a valid integer")
             print("\n\t{}\n".format(message))
-        elif (type(int(text_input)) != int) or not (number_pattern.search(text_input)):
-            message = error("input error".capitalize())
-            cause = custom("{} is not a valid integer".format(ve), 200, 77, 75)
-            print("\n{}\n\tCause:\t{}\n", message, cause)
+        elif not (integer_pattern.search(text_input)) and not (float_pattern.search(text_input)):
+            print("{} is an invalid number\n".format(text_input))
         else:
-            print("\nConverting {} to {}\n\n".format(text_input, selected_item))
+            if float_pattern.search(text_input):
+                is_float = True
+            else:
+                is_float = False
+
+            print("\n\tNumber: {}".format(text_input))
+            print("\nIs {} a floating point number? {}".format(
+                text_input, is_float))
+            print("\tConverting {} to {}\n".format(text_input, selected_item))
+
     except ValueError as ve:
         message = error("input error".title())
         cause = custom("{} is not a valid integer\n".format(ve), 200, 77, 75)
