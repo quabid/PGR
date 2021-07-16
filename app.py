@@ -33,7 +33,6 @@ lbl_entry_number.grid(column=1, row=1, ipadx=5)
 tf_entry_number = tk.Entry(
     controls_frame, textvariable=tf_entry_number_var, width=15)
 tf_entry_number.grid(column=2, row=1, columnspan=2, padx=5)
-tf_entry_number_var = tk.StringVar()
 tf_entry_number_var.set("")
 
 
@@ -53,7 +52,6 @@ btn_convert.grid(column=4, ipadx=5)
 
 
 def create_gui():
-
     # Layout controls
     frame.grid(column=0, row=6, columnspan=3)
     lbl_entry_number.grid(column=1, row=1, columnspan=2)
