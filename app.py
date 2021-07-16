@@ -17,24 +17,39 @@ float_pattern = re.compile('^[0-9]+(\.[0-9]+){1}$')
 
 
 # Number converters
-def hex(arg, is_float=False):
-    return arg
+def to_hex(arg):
+    if float_pattern.search(arg):
+        return float.hex(float(arg))
+    else:
+        num = int(arg.strip())
+        return hex(num).lstrip("0x").rstrip("L")
 
 
-def octal(arg, is_float=False):
-    return arg
+def to_octal(arg):
+    num = 0
+    if float_pattern.search(arg):
+        message = warning("Invalid Integer: {}\n\tConverting {} to an integer, so the precision will be lost\n".format(
+            arg, arg))
+        print("\n\t{}\n".format(message))
+        num = int(arg)
+        return oct(num).lstrip("0o").rstrip("L")
+    else:
+        num = int(arg)
+        return oct(num).lstrip("0o").rstrip("L")
 
 
-def binary(arg, is_float=False):
-    return arg
+def to_binary(arg):
+    if float_pattern.search(arg):
+        return "{0:b}".format(int(arg))
+    return "{0:b}".format(int(arg))
 
 
 # Spinbox
 combobox_list = ("Hexadecimal", "Octal", "Binary")
 combobox_switch = {
-    "Hexadecimal": lambda arg: hex(arg),
-    "Octal": lambda arg: octal(arg),
-    "Binary": lambda arg: binary(arg)
+    "Hexadecimal": lambda arg: to_hex(arg),
+    "Octal": lambda arg: to_octal(arg),
+    "Binary": lambda arg: to_binary(arg)
 }
 
 """ The root window
@@ -42,10 +57,15 @@ combobox_switch = {
 """
 content = tk.Tk()
 content.title("Converter")
-content.geometry("500x74")
+content.geometry("500x124")
 content.geometry("+500+174")
-content.minsize(500, 74)
+content.minsize(500, 124)
 content.attributes("-alpha", 0.5)
+
+
+# Top label
+label = tk.Label(content, font=('calibre', 10, 'bold'))
+label.grid(pady=1, ipadx=5, ipady=5, column=1, columnspan=12, row=1)
 
 # User input component
 tf_entry_number_var = tk.StringVar()
@@ -55,7 +75,7 @@ entry_results_var = tk.StringVar()
 """
 frame = tk.Frame(content, borderwidth=1,
                  relief="ridge")
-frame.grid(column=1, columnspan=12, row=1, padx=10, pady=10)
+frame.grid(column=1, columnspan=12, row=2, padx=10, pady=10)
 
 # Controls panel
 controls_frame = tk.Frame(frame)
@@ -90,7 +110,13 @@ def btn_click_handler():
             print("\n\tNumber: {}".format(success(text_input)))
             print("\tIs {} a floating point number? {}".format(
                 success(text_input), is_float))
-            print("\tConverting {} to {}\n".format(success(text_input), selected_item))
+            print("\tConverting {} to {}\n".format(
+                success(text_input), selected_item))
+
+            function = combobox_switch[selected_item]
+            results = function(text_input)
+            print("\n\tOrignal: {}\t{}: {}\n".format(
+                text_input, selected_item, results))
 
     except ValueError as ve:
         message = error("input error".title())
