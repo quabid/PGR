@@ -14,6 +14,7 @@ def cls(): return os.system('clear')
 # Regex integers
 number_pattern = re.compile('^[0-9]+$')
 
+
 # Number converters
 
 
@@ -37,11 +38,11 @@ combobox_switch = {
     "Binary": lambda arg: binary(arg)
 }
 
-# Content manager
+""" The root content pane
+    configure default size
+"""
 content = tk.Tk()
 content.title("Converter")
-
-# setting the windows size
 content.geometry("500x74")
 
 
@@ -56,11 +57,6 @@ frame.grid(column=1, columnspan=12, row=1, padx=10, pady=10)
 # User controls frame
 controls_frame = tk.Frame(frame)
 controls_frame.grid(columnspan=12, row=3, column=1, padx=10, pady=10)
-
-# Labels
-# lbl_entry_number = tk.Label(
-#     controls_frame, bg="White", fg="Black", text="Enter Number", font=('calibre', 10, 'bold'))
-# lbl_entry_number.grid(column=1, row=1, ipadx=5)
 
 # Text fields
 tf_entry_number = tk.Entry(
@@ -106,18 +102,15 @@ combo_box = tk.Spinbox(controls_frame, values=combobox_list, bg="White",
 combo_box.grid(column=1, row=1, ipadx=5)
 
 
-def create_gui():
-    # Layout controls
+def configure_and_create_gui():
+    # Configure layouts
     frame.grid(column=0, row=6, columnspan=3)
-    # lbl_entry_number.grid(column=1, row=1, columnspan=2)
     tf_entry_number.grid(column=4, columnspan=2, row=1)
     btn_convert.grid(column=7, columnspan=1, row=1)
-
     content.columnconfigure(1, weight=3)
     frame.columnconfigure(2, weight=2)
-
     content.mainloop()
 
 
 cls()
-create_gui()
+configure_and_create_gui()
