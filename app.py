@@ -43,6 +43,7 @@ combobox_switch = {
 content = tk.Tk()
 content.title("Converter")
 content.geometry("500x74")
+content.geometry("+500+174")
 content.minsize(500, 74)
 content.attributes("-alpha", 0.5)
 
@@ -79,7 +80,7 @@ def btn_click_handler():
             message = error("Must enter a valid integer")
             print("\n\t{}\n".format(message))
         elif not (integer_pattern.search(text_input)) and not (float_pattern.search(text_input)):
-            print("{} is an invalid number\n".format(text_input))
+            print("\t{} is an invalid number\n".format(warning(text_input)))
         else:
             if float_pattern.search(text_input):
                 is_float = True
