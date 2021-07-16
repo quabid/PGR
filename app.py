@@ -86,10 +86,10 @@ def btn_click_handler():
             else:
                 is_float = False
 
-            print("\n\tNumber: {}".format(text_input))
+            print("\n\tNumber: {}".format(success(text_input)))
             print("\tIs {} a floating point number? {}".format(
-                text_input, is_float))
-            print("\tConverting {} to {}\n".format(text_input, selected_item))
+                success(text_input), is_float))
+            print("\tConverting {} to {}\n".format(success(text_input), selected_item))
 
     except ValueError as ve:
         message = error("input error".title())
