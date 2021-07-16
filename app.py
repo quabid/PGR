@@ -64,7 +64,8 @@ content.attributes("-alpha", 0.5)
 
 
 # Top label
-label = tk.Label(content, font=('calibre', 10, 'bold'))
+label_var = tk.StringVar()
+label = tk.Label(content, textvariable=label_var, font=('calibre', 10, 'bold'))
 label.grid(pady=1, ipadx=5, ipady=5, column=1, columnspan=12, row=1)
 
 # User input component
@@ -115,6 +116,7 @@ def btn_click_handler():
 
             function = combobox_switch[selected_item]
             results = function(text_input)
+            label_var.set(results)
             print("\n\tOrignal: {}\t{}: {}\n".format(
                 text_input, selected_item, results))
 
