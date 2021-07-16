@@ -16,8 +16,6 @@ number_pattern = re.compile('^[0-9]+$')
 
 
 # Number converters
-
-
 def hex(arg):
     return arg
 
@@ -38,23 +36,24 @@ combobox_switch = {
     "Binary": lambda arg: binary(arg)
 }
 
-""" The root content pane
+""" The root window
     configure default size
 """
 content = tk.Tk()
 content.title("Converter")
 content.geometry("500x74")
 
-
+# User input component
 tf_entry_number_var = tk.StringVar()
 entry_results_var = tk.StringVar()
 
-# Main frame
+""" The main content pane
+"""
 frame = tk.Frame(content, borderwidth=1,
                  relief="ridge")
 frame.grid(column=1, columnspan=12, row=1, padx=10, pady=10)
 
-# User controls frame
+# Controls panel
 controls_frame = tk.Frame(frame)
 controls_frame.grid(columnspan=12, row=3, column=1, padx=10, pady=10)
 
