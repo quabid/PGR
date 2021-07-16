@@ -1,7 +1,18 @@
 import tkinter as tk
+import re
+import os
 from tkinter import ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
+from custom_modules import custom, error, success, warning
 
+# Clear console
+
+
+def cls(): return os.system('clear')
+
+
+# Regex integers
+number_pattern = re.compile('^[0-9]+$')
 
 # Content manager
 content = tk.Tk()
@@ -39,10 +50,20 @@ tf_entry_number_var.set("")
 def btn_click_handler():
     text_input = tf_entry_number_var.get()
 
-    if len(text_input) > 0:
-        print("\n\n\t\t{}\n\n".format(text_input))
-    else:
-        print("\n\t\tMust enter a number")
+    try:
+        if len(text_input) == 0:
+            message = error("Must enter a valid integer")
+            print("\n\t{}\n".format(message))
+        elif (type(int(text_input)) != int) or not (number_pattern.search(text_input)):
+            message = error("input error".capitalize())
+            cause = custom("{} is not a valid integer".format(ve), 200, 77, 75)
+            print("\n{}\n\tCause:\t{}\n", message, cause)
+        else:
+            print(text_input)
+    except ValueError as ve:
+        message = error("input error".title())
+        cause = custom("{} is not a valid integer\n".format(ve), 200, 77, 75)
+        print("\n{}\n\tCause:\t{}".format(message, cause))
 
 
 # Buttons
@@ -64,4 +85,5 @@ def create_gui():
     content.mainloop()
 
 
+cls()
 create_gui()
