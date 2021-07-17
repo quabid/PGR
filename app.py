@@ -87,10 +87,6 @@ content.attributes("-alpha", 0.5)
 handle(content)
 
 
-print("\n\n\tGrid Location:\tX = {}, Y = {}\n\n\n".format(
-    content.winfo_rootx(), content.winfo_rooty()))
-
-
 # Top label
 label_var = tk.StringVar()
 label = tk.Label(content, textvariable=label_var, font=('calibre', 10, 'bold'))
