@@ -53,7 +53,7 @@ combobox_switch = {
 }
 
 """ The root window
-    configure default size
+    configures a default size
 """
 content = tk.Tk()
 content.title("Converter")
@@ -111,13 +111,13 @@ def btn_click_handler():
             print("\n\tNumber: {}".format(success(text_input)))
             print("\tIs {} a floating point number? {}".format(
                 success(text_input), is_float))
-            print("\tConverting {} to {}\n".format(
+            print("\tConverting {} to {}".format(
                 success(text_input), selected_item))
 
             function = combobox_switch[selected_item]
             results = function(text_input)
             label_var.set(results)
-            print("\n\tOrignal: {}\t{}: {}\n".format(
+            print("\tOrignal: {}\t{}: {}\n".format(
                 text_input, selected_item, results))
 
     except ValueError as ve:
