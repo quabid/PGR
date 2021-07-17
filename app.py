@@ -4,7 +4,7 @@ import os
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
 from custom_modules import custom, error, success, warning
-from custom_modules.WindowEventHandler import handle
+from custom_modules.WindowEventHandler import window_handle
 
 # Clear console
 
@@ -88,7 +88,9 @@ content.geometry("500x124")
 content.geometry("+500+174")
 content.minsize(500, 124)
 content.attributes("-alpha", 0.5)
-handle(content)
+content.iconphoto(True, tk.PhotoImage(
+    file='~/private/projects/desktop/python/pgr/graphics/binary.png'))
+window_handle(content)
 
 
 # Top label
