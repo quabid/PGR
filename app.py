@@ -28,20 +28,41 @@ def to_hex(arg):
 def to_octal(arg):
     num = 0
     if float_pattern.search(arg):
-        message = warning("Invalid Integer: {}\n\tConverting {} to an integer, so the precision will be lost\n".format(
+        message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
             arg, arg))
-        print("\n\t{}\n".format(message))
-        num = int(arg)
-        return oct(num).lstrip("0o").rstrip("L")
+        print("\t{}\n".format(message))
+        try:
+            num = int(arg)
+            return oct(num)
+        except ValueError as e:
+            message = custom(
+                "Error casting {} to an integer".format(arg), 210, 180, 180)
+            raise ValueError("Error casting {} to an integer".format(arg),
+                             "Cause: {} is a floating point number".format(
+                                 arg),
+                             "Unable to cast {} to an integer".format(arg))
+
     else:
         num = int(arg)
         return oct(num).lstrip("0o").rstrip("L")
 
 
 def to_binary(arg):
+    num = 0
     if float_pattern.search(arg):
-        return "{0:b}".format(int(arg))
-    return "{0:b}".format(int(arg))
+        message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
+            arg, arg))
+        print("\t{}\n".format(message))
+        try:
+            num = int(arg)
+            return "{0:b}".format(num)
+        except ValueError as e:
+            message = custom(
+                "Error casting {} to an integer".format(arg), 210, 180, 180)
+            raise ValueError("Error casting {} to an integer".format(arg),
+                             "Cause: {} is a floating point number".format(
+                                 arg),
+                             "Unable to cast {} to an integer".format(arg))
 
 
 # Spinbox
@@ -116,14 +137,17 @@ def btn_click_handler():
 
             function = combobox_switch[selected_item]
             results = function(text_input)
-            label_var.set(results)
-            print("\tOrignal: {}\t{}: {}\n".format(
-                text_input, selected_item, results))
+
+            if results:
+                label_var.set(results)
+                print("\tOrignal: {}\t{}: {}\n".format(
+                    text_input, selected_item, results))
 
     except ValueError as ve:
-        message = error("input error".title())
-        cause = custom("{} is not a valid integer\n".format(ve), 200, 77, 75)
-        print("\n{}\n\tCause:\t{}".format(message, cause))
+        """  message = error("input error".title())
+         cause = custom("\t{} is not a valid integer\n".format(ve), 200, 77, 75)
+         print("\n\t{}\n\tCause:\t{}".format(message, cause)) """
+        print("{}".format(ve))
 
 
 def combobox_handler():
