@@ -65,6 +65,10 @@ def to_binary(arg):
                                  arg),
                              "Unable to cast {} to an integer".format(arg))
 
+    else:
+        num = int(arg)
+        return "{0:b}".format(num)
+
 
 # Spinbox
 combobox_list = ("Hexadecimal", "Octal", "Binary")
