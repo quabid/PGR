@@ -45,7 +45,7 @@ def error(arg):
                 line += u
 
     else:
-        line = fg.read + ef.italic + ef.bold + arg
+        line = fg.red + ef.italic + ef.bold + arg
 
     line += rs.all
 

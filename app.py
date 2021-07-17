@@ -4,6 +4,7 @@ import os
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
 from custom_modules import custom, error, success, warning
+from custom_modules.WindowEventHandler import handle
 
 # Clear console
 
@@ -73,15 +74,21 @@ combobox_switch = {
     "Binary": lambda arg: to_binary(arg)
 }
 
-""" The root window
+""" The root window & it's openin and closing handlers
     configures a default size
 """
+cls()
 content = tk.Tk()
 content.title("Converter")
 content.geometry("500x124")
 content.geometry("+500+174")
 content.minsize(500, 124)
 content.attributes("-alpha", 0.5)
+handle(content)
+
+
+print("\n\n\tGrid Location:\tX = {}, Y = {}\n\n\n".format(
+    content.winfo_rootx(), content.winfo_rooty()))
 
 
 # Top label
@@ -177,5 +184,4 @@ def configure_and_create_gui():
     content.mainloop()
 
 
-cls()
 configure_and_create_gui()
