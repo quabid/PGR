@@ -1,3 +1,4 @@
+from custom_modules.DialogMessinger import MESSINGER_SWITCH
 import tkinter as tk
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
@@ -67,8 +68,11 @@ def btn_click_handler():
 
     try:
         if len(text_input) == 0:
-            message = error("Must enter a valid integer")
-            print("\n\t{}\n".format(message))
+            message = "Must enter a valid number"
+            function = MESSINGER_SWITCH["warning"]
+            function("You did not enter a number",message)
+            status = warning(message)
+            print("\n\t{}\n".format(status))
         elif not (integer_pattern.search(text_input)) and not (float_pattern.search(text_input)):
             print("\t{} is an invalid number\n".format(warning(text_input)))
         else:
