@@ -1,47 +1,13 @@
+from custom_modules.DialogMessinger import MESSINGER_SWITCH
 import tkinter as tk
-import re
-import os
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
-from custom_modules import custom, error, success, warning
+from custom_modules import error, success, warning
+from custom_modules.WindowEventHandler import window_handler
+from custom_modules.NumberConverter import to_binary, to_hex, to_octal
+from custom_modules.NumberPatternManager import float_pattern, integer_pattern
+from custom_modules.Utils import cls
 
-# Clear console
-
-
-def cls(): return os.system('clear')
-
-
-# Regex integers
-integer_pattern = re.compile('^[0-9]+$')
-float_pattern = re.compile('^[0-9]+(\.[0-9]+){1}$')
-
-
-# Number converters
-def to_hex(arg):
-    if float_pattern.search(arg):
-        return float.hex(float(arg))
-    else:
-        num = int(arg.strip())
-        return hex(num).lstrip("0x").rstrip("L")
-
-
-def to_octal(arg):
-    num = 0
-    if float_pattern.search(arg):
-        message = warning("Invalid Integer: {}\n\tConverting {} to an integer, so the precision will be lost\n".format(
-            arg, arg))
-        print("\n\t{}\n".format(message))
-        num = int(arg)
-        return oct(num).lstrip("0o").rstrip("L")
-    else:
-        num = int(arg)
-        return oct(num).lstrip("0o").rstrip("L")
-
-
-def to_binary(arg):
-    if float_pattern.search(arg):
-        return "{0:b}".format(int(arg))
-    return "{0:b}".format(int(arg))
 
 
 # Spinbox
@@ -52,15 +18,19 @@ combobox_switch = {
     "Binary": lambda arg: to_binary(arg)
 }
 
-""" The root window
-    configure default size
+""" The root window & it's openin and closing handlers
+    configures a default size
 """
+cls()
 content = tk.Tk()
 content.title("Converter")
 content.geometry("500x124")
 content.geometry("+500+174")
 content.minsize(500, 124)
 content.attributes("-alpha", 0.5)
+content.iconphoto(True, tk.PhotoImage(
+    file='~/private/projects/desktop/python/pgr/graphics/binary.png'))
+window_handler(content)
 
 
 # Top label
@@ -98,8 +68,11 @@ def btn_click_handler():
 
     try:
         if len(text_input) == 0:
-            message = error("Must enter a valid integer")
-            print("\n\t{}\n".format(message))
+            message = "Must enter a valid number"
+            function = MESSINGER_SWITCH["warning"]
+            function("You did not enter a number",message)
+            status = warning(message)
+            print("\n\t{}\n".format(status))
         elif not (integer_pattern.search(text_input)) and not (float_pattern.search(text_input)):
             print("\t{} is an invalid number\n".format(warning(text_input)))
         else:
@@ -111,19 +84,19 @@ def btn_click_handler():
             print("\n\tNumber: {}".format(success(text_input)))
             print("\tIs {} a floating point number? {}".format(
                 success(text_input), is_float))
-            print("\tConverting {} to {}\n".format(
+            print("\tConverting {} to {}".format(
                 success(text_input), selected_item))
 
             function = combobox_switch[selected_item]
             results = function(text_input)
-            label_var.set(results)
-            print("\n\tOrignal: {}\t{}: {}\n".format(
-                text_input, selected_item, results))
+
+            if results:
+                label_var.set(results)
+                print("\tOrignal: {}\t{}: {}\n".format(
+                    text_input, selected_item, results))
 
     except ValueError as ve:
-        message = error("input error".title())
-        cause = custom("{} is not a valid integer\n".format(ve), 200, 77, 75)
-        print("\n{}\n\tCause:\t{}".format(message, cause))
+        print("{}".format(ve))
 
 
 def combobox_handler():
@@ -153,5 +126,4 @@ def configure_and_create_gui():
     content.mainloop()
 
 
-cls()
 configure_and_create_gui()
