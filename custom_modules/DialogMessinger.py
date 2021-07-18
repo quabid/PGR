@@ -3,7 +3,7 @@ from tkinter import messagebox as tkMessageBox
 
 
 def error(title="title", message="message"):
-    tkMessageBox.showinfo(title, message)
+    tkMessageBox.showerror(title, message)
 
 
 def warning(title="title", message="message"):
