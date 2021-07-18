@@ -1,73 +1,15 @@
 import tkinter as tk
-import re
 import os
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
-from custom_modules import custom, error, success, warning
-from custom_modules.WindowEventHandler import window_handle
-
+from custom_modules import error, success, warning
+from custom_modules.WindowEventHandler import window_handler
+from custom_modules.NumberConverter import to_binary, to_hex, to_octal
+from custom_modules.NumberPatternManager import float_pattern, integer_pattern
 # Clear console
 
 
 def cls(): return os.system('clear')
-
-
-# Regex integers
-integer_pattern = re.compile('^[0-9]+$')
-float_pattern = re.compile('^[0-9]+(\.[0-9]+){1}$')
-
-
-# Number converters
-def to_hex(arg):
-    if float_pattern.search(arg):
-        return float.hex(float(arg))
-    else:
-        num = int(arg.strip())
-        return hex(num).lstrip("0x").rstrip("L")
-
-
-def to_octal(arg):
-    num = 0
-    if float_pattern.search(arg):
-        message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
-            arg, arg))
-        print("\t{}\n".format(message))
-        try:
-            num = int(arg)
-            return oct(num)
-        except ValueError as e:
-            message = custom(
-                "Error casting {} to an integer".format(arg), 210, 180, 180)
-            raise ValueError("Error casting {} to an integer".format(arg),
-                             "Cause: {} is a floating point number".format(
-                                 arg),
-                             "Unable to cast {} to an integer".format(arg))
-
-    else:
-        num = int(arg)
-        return oct(num).lstrip("0o").rstrip("L")
-
-
-def to_binary(arg):
-    num = 0
-    if float_pattern.search(arg):
-        message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
-            arg, arg))
-        print("\t{}\n".format(message))
-        try:
-            num = int(arg)
-            return "{0:b}".format(num)
-        except ValueError as e:
-            message = custom(
-                "Error casting {} to an integer".format(arg), 210, 180, 180)
-            raise ValueError("Error casting {} to an integer".format(arg),
-                             "Cause: {} is a floating point number".format(
-                                 arg),
-                             "Unable to cast {} to an integer".format(arg))
-
-    else:
-        num = int(arg)
-        return "{0:b}".format(num)
 
 
 # Spinbox
@@ -90,7 +32,7 @@ content.minsize(500, 124)
 content.attributes("-alpha", 0.5)
 content.iconphoto(True, tk.PhotoImage(
     file='~/private/projects/desktop/python/pgr/graphics/binary.png'))
-window_handle(content)
+window_handler(content)
 
 
 # Top label

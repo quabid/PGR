@@ -23,7 +23,7 @@ def config_location(content):
     content.destroy()
 
 
-def window_handle(window):
+def window_handler(window):
 
     def on_close():
         coordinates = {
