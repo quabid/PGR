@@ -25,7 +25,7 @@ def to_octal(arg):
         except ValueError as e:
             message = "Error casting {} to an integer".format(arg)
 
-            function = MESSAGE_SWITCH["error"]
+            function = MESSINGER_SWITCH["error"]
             function("casting error".title(), message)
 
             raise ValueError("Error casting {} to an integer".format(arg),
@@ -49,7 +49,7 @@ def to_binary(arg):
         except ValueError as e:
             message = "Error casting {} to an integer".format(arg)
 
-            function = MESSAGE_SWITCH["error"]
+            function = MESSINGER_SWITCH["error"]
             function("casting error".title(), message)
 
             raise ValueError("Error casting {} to an integer".format(arg),
