@@ -1,4 +1,4 @@
-from custom_modules.DialogMessinger import MESSENGER_SWITCH
+from custom_modules.DialogMessenger import MESSENGER_SWITCH
 import tkinter as tk
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
