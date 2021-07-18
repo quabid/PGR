@@ -1,6 +1,6 @@
 from .StatusMessenger import custom, success, warning, error
 from .NumberPatternManager import float_pattern, integer_pattern
-from .DialogMessinger import MESSINGER_SWITCH
+from .DialogMessenger import MESSINGER_SWITCH
 
 
 # Number converters
