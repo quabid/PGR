@@ -1,15 +1,12 @@
 import tkinter as tk
-import os
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
 from custom_modules import error, success, warning
 from custom_modules.WindowEventHandler import window_handler
 from custom_modules.NumberConverter import to_binary, to_hex, to_octal
 from custom_modules.NumberPatternManager import float_pattern, integer_pattern
-# Clear console
+from custom_modules.Utils import cls
 
-
-def cls(): return os.system('clear')
 
 
 # Spinbox
