@@ -23,15 +23,7 @@ def to_octal(arg):
             num = int(arg)
             return oct(num)
         except ValueError as e:
-            message = "Error casting {} to an integer".format(arg)
-
-            function = MESSINGER_SWITCH["error"]
-            function("casting error".title(), message)
-
-            raise ValueError("Error casting {} to an integer".format(arg),
-                             "Cause: {} is a floating point number".format(
-                                 arg),
-                             "Unable to cast {} to an integer".format(arg))
+            raise_error(arg)
 
     else:
         num = int(arg)
@@ -47,19 +39,23 @@ def to_binary(arg):
             num = int(arg)
             return "{0:b}".format(num)
         except ValueError as e:
-            message = "Error casting {} to an integer".format(arg)
-
-            function = MESSINGER_SWITCH["error"]
-            function("casting error".title(), message)
-
-            raise ValueError("Error casting {} to an integer".format(arg),
-                             "Cause: {} is a floating point number".format(
-                                 arg),
-                             "Unable to cast {} to an integer".format(arg))
+            raise_error(arg)
 
     else:
         num = int(arg)
         return "{0:b}".format(num)
+
+
+def raise_error(arg):
+    message = "Error casting {} to an integer".format(arg)
+
+    function = MESSINGER_SWITCH["error"]
+    function("casting error".title(), message)
+
+    raise ValueError("Error casting {} to an integer".format(arg),
+                     "Cause: {} is a floating point number".format(
+        arg),
+        "Unable to cast {} to an integer".format(arg))
 
 
 def debug(arg):
