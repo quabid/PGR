@@ -17,9 +17,8 @@ def to_hex(arg):
 def to_octal(arg):
     num = 0
     if float_pattern.search(arg):
-        message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
-            arg, arg))
-        print("\t{}\n".format(message))
+        debug(arg)
+
         try:
             num = int(arg)
             return oct(num)
@@ -42,9 +41,8 @@ def to_octal(arg):
 def to_binary(arg):
     num = 0
     if float_pattern.search(arg):
-        message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
-            arg, arg))
-        print("\t{}\n".format(message))
+        debug(arg)
+        
         try:
             num = int(arg)
             return "{0:b}".format(num)
@@ -62,3 +60,9 @@ def to_binary(arg):
     else:
         num = int(arg)
         return "{0:b}".format(num)
+
+
+def debug(arg):
+    message = warning("Warning: {} is a floating point number\n\tConverting {} to an integer, so the precision will be lost\n".format(
+        arg, arg))
+    print("\t{}\n".format(message))
