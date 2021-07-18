@@ -1,6 +1,6 @@
 from .StatusMessenger import custom, success, warning, error
 from .NumberPatternManager import float_pattern, integer_pattern
-from .DialogMessenger import MESSINGER_SWITCH
+from .DialogMessenger import MESSENGER_SWITCH
 
 
 # Number converters
@@ -49,7 +49,7 @@ def to_binary(arg):
 def raise_error(arg):
     message = "Error casting {} to an integer".format(arg)
 
-    function = MESSINGER_SWITCH["error"]
+    function = MESSENGER_SWITCH["error"]
     function("casting error".title(), message)
 
     raise ValueError("Error casting {} to an integer".format(arg),
