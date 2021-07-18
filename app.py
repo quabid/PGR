@@ -92,9 +92,6 @@ def btn_click_handler():
                     text_input, selected_item, results))
 
     except ValueError as ve:
-        """  message = error("input error".title())
-         cause = custom("\t{} is not a valid integer\n".format(ve), 200, 77, 75)
-         print("\n\t{}\n\tCause:\t{}".format(message, cause)) """
         print("{}".format(ve))
 
 

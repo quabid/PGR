@@ -1,5 +1,7 @@
 from .StatusMessenger import custom, success, warning, error
 from .NumberPatternManager import float_pattern, integer_pattern
+from .DialogMessenger import MESSAGE_SWITCH
+
 
 # Number converters
 
@@ -22,8 +24,11 @@ def to_octal(arg):
             num = int(arg)
             return oct(num)
         except ValueError as e:
-            message = custom(
-                "Error casting {} to an integer".format(arg), 210, 180, 180)
+            message = "Error casting {} to an integer".format(arg)
+
+            function = MESSAGE_SWITCH["error"]
+            function("casting error".title(), message)
+
             raise ValueError("Error casting {} to an integer".format(arg),
                              "Cause: {} is a floating point number".format(
                                  arg),
@@ -44,8 +49,11 @@ def to_binary(arg):
             num = int(arg)
             return "{0:b}".format(num)
         except ValueError as e:
-            message = custom(
-                "Error casting {} to an integer".format(arg), 210, 180, 180)
+            message = "Error casting {} to an integer".format(arg)
+
+            function = MESSAGE_SWITCH["error"]
+            function("casting error".title(), message)
+
             raise ValueError("Error casting {} to an integer".format(arg),
                              "Cause: {} is a floating point number".format(
                                  arg),
