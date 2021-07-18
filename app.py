@@ -1,4 +1,4 @@
-from custom_modules.DialogMessinger import MESSINGER_SWITCH
+from custom_modules.DialogMessinger import MESSENGER_SWITCH
 import tkinter as tk
 from tkinter import Spinbox, ttk
 from tkinter.constants import BOTTOM, CENTER, LEFT, RIGHT
@@ -69,7 +69,7 @@ def btn_click_handler():
     try:
         if len(text_input) == 0:
             message = "Must enter a valid number"
-            function = MESSINGER_SWITCH["warning"]
+            function = MESSENGER_SWITCH["warning"]
             function("You did not enter a number",message)
             status = warning(message)
             print("\n\t{}\n".format(status))
