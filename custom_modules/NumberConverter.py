@@ -1,6 +1,6 @@
 from .StatusMessenger import custom, success, warning, error
 from .NumberPatternManager import float_pattern, integer_pattern
-from .DialogMessenger import MESSAGE_SWITCH
+from .DialogMessinger import MESSINGER_SWITCH
 
 
 # Number converters
@@ -42,7 +42,7 @@ def to_binary(arg):
     num = 0
     if float_pattern.search(arg):
         debug(arg)
-        
+
         try:
             num = int(arg)
             return "{0:b}".format(num)

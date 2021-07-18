@@ -14,7 +14,7 @@ def success(title="title", message="message"):
     tkMessageBox.showinfo(title, message)
 
 
-MESSAGE_SWITCH = {
+MESSINGER_SWITCH = {
     "error": error,
     "warning": warning,
     "success": success
