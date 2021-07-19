@@ -23,7 +23,7 @@ def to_octal(arg):
             num = int(arg)
             return oct(num)
         except ValueError as e:
-            raise_error(arg)
+            raise_casting_error(arg)
 
     else:
         num = int(arg)
@@ -39,14 +39,14 @@ def to_binary(arg):
             num = int(arg)
             return "{0:b}".format(num)
         except ValueError as e:
-            raise_error(arg)
+            raise_casting_error(arg)
 
     else:
         num = int(arg)
         return "{0:b}".format(num)
 
 
-def raise_error(arg):
+def raise_casting_error(arg):
     message = "Error casting {} to an integer".format(arg)
 
     function = MESSENGER_SWITCH["error"]
